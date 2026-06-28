@@ -40,26 +40,82 @@
         nav ul li a { color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
         nav ul li a:hover { color: #f4a261; }
 
-        /* Seção Hero (Banner Principal) */
+        /* Seção Hero (Banner Principal com Efeito Looney Tunes) */
         .hero {
-            background: linear-gradient(rgba(13, 59, 102, 0.8), rgba(13, 59, 102, 0.8)), url('https://images.unsplash.com/photo-1506105342721-6677f52fccce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            height: 80vh;
+            background: linear-gradient(rgba(13, 59, 102, 0.85), rgba(13, 59, 102, 0.85)), url('https://images.unsplash.com/photo-1506105342721-6677f52fccce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
-            padding: 0 20px;
+            padding: 40px 20px;
         }
+
+        /* --- EFEITO LOONEY TUNES --- */
+        .looney-tunes-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Círculos coloridos concêntricos */
+        .lt-rings {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #082846; /* Fundo escuro do meio */
+            box-shadow: 
+                0 0 0 15px #e76f51,  /* Anel 1 Laranja Escuro */
+                0 0 0 35px #f4a261,  /* Anel 2 Laranja Claro */
+                0 0 0 55px #0d3b66;  /* Anel 3 Azul Marinho */
+            z-index: 1;
+            animation: pulseRings 3s infinite alternate;
+        }
+
+        /* A imagem pulando para fora */
+        .lt-image {
+            position: relative;
+            z-index: 2;
+            width: 260px; /* Imagem maior que o centro para "vazar" pelas bordas */
+            height: auto;
+            transform: translateY(-15px) scale(1.1); /* Puxa a imagem um pouco para cima */
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6)); /* Sombra para dar profundidade 3D */
+            animation: popOut 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Animações do Looney Tunes */
+        @keyframes popOut {
+            0% { transform: translateY(50px) scale(0); opacity: 0; }
+            100% { transform: translateY(-15px) scale(1.1); opacity: 1; }
+        }
+        @keyframes pulseRings {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+        /* --------------------------- */
+
         .hero h2 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
+            z-index: 3;
         }
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
             margin-bottom: 30px;
+            z-index: 3;
+        }
+        .botoes-hero {
+            display: flex;
+            gap: 15px;
+            z-index: 3;
         }
         .btn {
             background-color: #f4a261;
@@ -69,11 +125,12 @@
             font-weight: bold;
             border-radius: 5px;
             font-size: 1.1rem;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.2s;
         }
         .btn:hover {
             background-color: #e76f51;
             color: white;
+            transform: scale(1.05);
         }
 
         /* Seção O que Fazemos */
@@ -122,9 +179,9 @@
             color: #555;
         }
 
-        /* Seção Contato */
+        /* Seção Contato WhatsApp */
         .contact {
-            padding: 5rem 5%;
+            padding: 6rem 5%;
             background-color: #0d3b66;
             color: white;
             text-align: center;
@@ -132,35 +189,29 @@
         .contact .section-title {
             color: white;
         }
-        .contact form {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .contact p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
         }
-        .contact input, .contact textarea {
-            width: 100%;
-            padding: 15px;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-            font-size: 1rem;
-        }
-        .contact button {
-            background-color: #f4a261;
-            color: #0d3b66;
-            border: none;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .contact button:hover {
-            background-color: #e76f51;
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #25D366; /* Verde Oficial do WhatsApp */
             color: white;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
         }
 
         /* Rodapé */
@@ -176,7 +227,9 @@
         /* Responsividade */
         @media (max-width: 768px) {
             header { flex-direction: column; text-align: center; gap: 15px; }
-            .hero h2 { font-size: 2.5rem; }
+            .hero h2 { font-size: 2.2rem; }
+            .looney-tunes-wrapper { transform: scale(0.8); margin-bottom: 10px; }
+            .botoes-hero { flex-direction: column; }
         }
     </style>
 </head>
@@ -190,16 +243,29 @@
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#servicos">O que fazemos</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <!-- Fale conosco apontando para a seção do Zap -->
+                <li><a href="#contato">Fale Conosco</a></li> 
             </ul>
         </nav>
     </header>
 
-    <!-- Seção Hero -->
+    <!-- Seção Hero com Efeito Looney Tunes -->
     <section id="inicio" class="hero">
+        
+        <div class="looney-tunes-wrapper">
+            <div class="lt-rings"></div>
+            <!-- Sua Imagem pulando do círculo -->
+            <img src="image.png" alt="Mascote Vale Pescados" class="lt-image">
+        </div>
+
         <h2>A sua melhor experiência de pesca</h2>
         <p>Acompanhe as melhores dicas, pescarias e equipamentos com a equipe Vale Pescados. Tudo o que você precisa saber para a sua próxima aventura.</p>
-        <a href="blog.html" class="btn">Acessar nosso Blog</a>
+        
+        <div class="botoes-hero">
+            <a href="blog.html" class="btn">Acessar nosso Blog</a>
+            <!-- Botão redirecionando para o WhatsApp -->
+            <a href="https://wa.me/5537998614304" target="_blank" class="btn" style="background-color: #25D366; color: white;">Me chame no Zap</a>
+        </div>
     </section>
 
     <!-- Seção O que Fazemos -->
@@ -221,16 +287,18 @@
         </div>
     </section>
 
-    <!-- Seção Contato -->
+    <!-- Seção Contato WhatsApp Exclusivo -->
     <section id="contato" class="contact">
         <h2 class="section-title">Fale Conosco</h2>
-        <p style="margin-bottom: 30px;">Tem alguma dúvida, sugestão de pauta para o blog ou quer compartilhar sua pescaria? Mande uma mensagem!</p>
-        <form action="#" method="POST">
-            <input type="text" name="nome" placeholder="Seu Nome" required>
-            <input type="email" name="email" placeholder="Seu E-mail" required>
-            <textarea name="mensagem" rows="5" placeholder="Sua Mensagem..." required></textarea>
-            <button type="submit">Enviar Mensagem</button>
-        </form>
+        <p>Tem alguma dúvida, sugestão de pauta para o blog ou quer mostrar a foto daquele peixão que você pegou? Não precisa mandar e-mail, é só me chamar direto no WhatsApp!</p>
+        
+        <a href="https://wa.me/5537998614304" target="_blank" class="whatsapp-btn">
+            <!-- Ícone de WhatsApp em SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.004-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+            </svg>
+            (37) 99861-4304
+        </a>
     </section>
 
     <!-- Rodapé -->
